@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillUp Academy — Learn Skills. Build Your Future.</title>
+<style>
+/* ================================================================
+   SKILLUP ACADEMY — STYLESHEET
+   Sections are grouped and commented to match index.html.
+   ================================================================ */
+
+/* ---------- DESIGN TOKENS ---------- */
+:root{
+  --navy-900:#0a1a33;
+  --navy-800:#0e234a;
+  --navy-700:#13305f;
+  --blue-500:#2d6cdf;
+  --blue-400:#4c8bff;
+  --purple-500:#7c5cff;
+  --gold-500:#f2ae3f;
+  --white:#ffffff;
+  --ink:#0a1a33;
+  --ink-soft:#4a5872;
+  --bg-soft:#f4f7fc;
+  --border:#e1e7f2;
+  --success:#1f9d55;
+  --danger:#d64545;
+  --radius-sm:6px;
+  --radius-md:12px;
+  --radius-lg:20px;
+  --shadow:0 10px 30px rgba(10,26,51,0.10);
+  --font-head:'Georgia','Times New Roman',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --max-w:1180px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.55;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+h1,h2,h3,h4{font-family:var(--font-head);margin:0 0 .5em 0;line-height:1.15;font-weight:600;}
+p{margin:0 0 1em 0;color:var(--ink-soft);}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
+section{padding:88px 0;}
+
+:focus-visible{outline:3px solid var(--gold-500);outline-offset:2px;}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 26px;border-radius:999px;border:none;font-size:15px;font-weight:600;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--gold-500);color:var(--navy-900);}
+.btn-primary:hover{box-shadow:0 8px 18px rgba(242,174,63,.4);}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.55);}
+.btn-outline:hover{background:rgba(255,255,255,.1);}
+.btn-navy{background:var(--navy-800);color:var(--white);}
+.btn-navy:hover{background:var(--navy-700);}
+.btn-ghost{background:var(--bg-soft);color:var(--navy-900);}
+.btn-ghost:hover{background:var(--border);}
+.btn-sm{padding:9px 16px;font-size:13.5px;border-radius:999px;}
+.btn-block{width:100%;}
+.btn:disabled{opacity:.55;cursor:not-allowed;}
+
+/* ---------- HEADER / NAV ---------- */
+header{
+  position:sticky;top:0;z-index:500;
+  background:var(--navy-900);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.nav{
+  display:flex;align-items:center;gap:26px;
+  padding:16px 24px;max-width:var(--max-w);margin:0 auto;
+}
+.logo{display:flex;align-items:center;gap:10px;color:var(--white);flex-shrink:0;}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold-500),#ffd88a);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);font-weight:700;color:var(--navy-900);font-size:18px;
+}
+.logo-text{font-family:var(--font-head);font-size:19px;font-weight:700;}
+.nav-links{display:flex;gap:24px;list-style:none;margin:0;padding:0;flex:1;}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent;}
+.nav-links a:hover{color:var(--white);border-bottom-color:var(--gold-500);}
+.search-box{
+  display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 14px;
+  min-width:200px;
+}
+.search-box input{background:transparent;border:none;color:var(--white);font-size:13.5px;width:100%;}
+.search-box input::placeholder{color:rgba(255,255,255,.5);}
+.search-box input:focus{outline:none;}
+.nav-actions{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.icon-btn{
+  position:relative;background:transparent;border:none;color:var(--white);
+  font-size:18px;padding:6px;border-radius:8px;
+}
+.icon-btn:hover{background:rgba(255,255,255,.08);}
+.badge{
+  position:absolute;top:-2px;right:-2px;background:var(--gold-500);color:var(--navy-900);
+  font-size:10.5px;font-weight:700;border-radius:999px;min-width:16px;height:16px;
+  display:flex;align-items:center;justify-content:center;padding:0 3px;
+}
+.hamburger{display:none;background:none;border:none;color:var(--white);font-size:22px;}
+
+@media (max-width:980px){
+  .search-box{display:none;}
+  .nav-links{
+    position:fixed;top:68px;left:0;right:0;background:var(--navy-900);
+    flex-direction:column;gap:0;padding:8px 0;
+    transform:translateY(-140%);transition:transform .25s ease;
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .nav-links.open{transform:translateY(0);}
+  .nav-links a{padding:14px 24px;width:100%;border-bottom:1px solid rgba(255,255,255,.06);}
+  .hamburger{display:block;}
+  .nav-actions .btn-sm{display:none;}
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  background:
+    radial-gradient(ellipse at top right, rgba(124,92,255,.35), transparent 55%),
+    linear-gradient(180deg,var(--navy-900),var(--navy-800));
+  color:var(--white);padding:96px 0 70px;
+}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
+.hero h1{font-size:clamp(34px,4.6vw,54px);color:var(--white);max-width:16ch;}
+.hero p.lead{color:rgba(255,255,255,.78);font-size:18px;max-width:46ch;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+.hero-art{
+  background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);
+  padding:28px;
+}
+.hero-art-light{background:var(--white);border-color:var(--border);}
+.hero-art-light .tag{color:var(--ink-soft);}
+.hero-art-light .val{color:var(--navy-900);}
+.hero-art-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+.hero-art-light .hero-art-row{border-bottom-color:var(--border);}
+.hero-art-row:last-child{border-bottom:none;}
+.hero-art-row .tag{font-size:12px;color:rgba(255,255,255,.55);}
+.hero-art-row .val{font-family:var(--font-head);font-size:20px;color:var(--gold-500);}
+
+.stats-bar{background:var(--navy-700);color:var(--white);}
+.stats-grid{
+  max-width:var(--max-w);margin:0 auto;padding:34px 24px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;
+}
+.stat-num{font-family:var(--font-head);font-size:30px;color:var(--gold-500);}
+.stat-label{font-size:13px;color:rgba(255,255,255,.72);}
+@media (max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ---------- SECTION HEADINGS ---------- */
+.section-head{max-width:640px;margin-bottom:40px;}
+.section-head h2{font-size:clamp(26px,3vw,36px);}
+.section-head p{font-size:16px;}
+.section-alt{background:var(--bg-soft);}
+
+/* ---------- COURSES ---------- */
+.course-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+.chip{
+  padding:8px 16px;border-radius:999px;background:var(--white);border:1px solid var(--border);
+  font-size:13.5px;font-weight:600;color:var(--ink-soft);
+}
+.chip.active{background:var(--navy-900);color:var(--white);border-color:var(--navy-900);}
+
+.course-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+@media (max-width:1080px){.course-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.course-grid{grid-template-columns:1fr;}}
+
+.no-results{grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:40px 0;font-size:15px;}
+
+.course-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);
+  overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s ease, transform .2s ease;
+}
+.course-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+.course-thumb{
+  height:120px;position:relative;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);color:#fff;font-size:15px;font-weight:700;text-align:center;padding:10px;
+}
+.wishlist-btn{
+  position:absolute;top:10px;right:10px;background:rgba(10,26,51,.55);border:none;
+  width:32px;height:32px;border-radius:999px;color:#fff;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+}
+.wishlist-btn.active{background:var(--gold-500);color:var(--navy-900);}
+.course-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.course-cat{font-size:11.5px;font-weight:700;color:var(--blue-500);}
+.course-title{font-family:var(--font-head);font-size:17px;margin:0;}
+.course-meta{font-size:13px;color:var(--ink-soft);display:flex;gap:10px;flex-wrap:wrap;}
+.course-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;}
+.course-price{font-family:var(--font-head);font-size:19px;color:var(--navy-900);}
+.course-actions{display:flex;gap:8px;margin-top:10px;}
+.course-actions .btn{flex:1;padding:10px 12px;font-size:13px;}
+
+/* ---------- MODALS / OVERLAYS ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(10,26,51,.55);z-index:900;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.overlay.open{display:flex;}
+.modal{
+  background:var(--white);border-radius:var(--radius-lg);max-width:560px;width:100%;
+  max-height:88vh;overflow-y:auto;padding:30px;position:relative;
+}
+.modal-wide{max-width:760px;}
+.modal-close{
+  position:absolute;top:16px;right:16px;background:var(--bg-soft);border:none;
+  width:34px;height:34px;border-radius:999px;font-size:16px;color:var(--ink-soft);
+}
+.modal-close-static{position:static;}
+.modal h3{font-size:22px;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.field input,.field select,.field textarea{
+  width:100%;padding:11px 13px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  font-size:14px;font-family:inherit;background:var(--white);
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--blue-400);border-color:transparent;}
+.form-note{font-size:12px;color:var(--ink-soft);margin-top:-6px;}
+.form-note-strong{
+  background:#fff4e0;border:1px solid #f2d9a8;color:#8a5a00;padding:10px 14px;border-radius:var(--radius-sm);
+  font-weight:600;margin-bottom:16px;font-size:13px;
+}
+.success-box{
+  background:#eaf8f0;border:1px solid #bfe8cf;color:var(--success);padding:16px;border-radius:var(--radius-sm);
+  font-size:14px;font-weight:600;margin-top:14px;
+}
+.success-box-light{background:rgba(255,255,255,.18);border-color:transparent;color:#fff;}
+
+/* course details modal specifics */
+.cd-header{display:flex;gap:18px;flex-wrap:wrap;}
+.cd-thumb{width:180px;height:120px;border-radius:var(--radius-sm);flex-shrink:0;}
+.cd-badges{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);margin:8px 0;}
+.cd-modules{list-style:none;padding:0;margin:14px 0;display:flex;flex-direction:column;gap:8px;}
+.cd-modules li{
+  background:var(--bg-soft);padding:10px 14px;border-radius:var(--radius-sm);font-size:13.5px;
+  display:flex;justify-content:space-between;
+}
+
+/* ---------- CART / WISHLIST DRAWER ---------- */
+.cart-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:380px;max-width:92vw;background:var(--white);
+  z-index:950;transform:translateX(100%);transition:transform .25s ease;
+  display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,.15);
+}
+.cart-drawer.open{transform:translateX(0);}
+.cart-head{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.cart-head h3{margin:0;}
+.cart-items{flex:1;overflow-y:auto;padding:12px 20px;}
+.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);align-items:center;}
+.cart-item-thumb{width:52px;height:52px;border-radius:8px;flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-info .name{font-size:14px;font-weight:600;}
+.cart-item-info .price{font-size:13px;color:var(--ink-soft);}
+.remove-btn{background:none;border:none;color:var(--danger);font-size:12.5px;font-weight:600;}
+.cart-footer{padding:18px 20px;border-top:1px solid var(--border);}
+.cart-total-row{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:14px;}
+.empty-note{color:var(--ink-soft);font-size:14px;padding:30px 0;text-align:center;}
+
+/* ---------- ABOUT / INSTRUCTORS / TESTIMONIALS ---------- */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+@media (max-width:840px){.about-grid{grid-template-columns:1fr;}}
+.instructor-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media (max-width:840px){.instructor-grid,.testimonial-grid{grid-template-columns:1fr;}}
+.instructor-card{text-align:center;padding:26px 18px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);}
+.avatar{
+  width:78px;height:78px;border-radius:999px;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-head);
+  font-size:24px;font-weight:700;
+}
+.testimonial-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;}
+.testimonial-card .stars{color:var(--gold-500);margin-bottom:10px;font-size:14px;}
+.testimonial-name{font-weight:700;font-size:14px;margin-top:12px;}
+
+/* ---------- REGISTER / NEWSLETTER / CONTACT ---------- */
+.split-panel{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;background:var(--navy-900);color:#fff;
+  border-radius:var(--radius-lg);padding:44px;
+}
+@media (max-width:840px){.split-panel{grid-template-columns:1fr;}}
+.split-panel h2{color:#fff;}
+.split-panel p{color:rgba(255,255,255,.72);}
+.split-panel .field label{color:rgba(255,255,255,.85);}
+.split-panel .field input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#fff;}
+.split-panel .field input::placeholder{color:rgba(255,255,255,.4);}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+@media (max-width:840px){.contact-grid{grid-template-columns:1fr;}}
+.newsletter-box{
+  background:linear-gradient(120deg,var(--blue-500),var(--navy-800));color:#fff;
+  border-radius:var(--radius-lg);padding:40px;text-align:center;align-self:start;
+}
+.newsletter-box h3{color:#fff;}
+.newsletter-box p{color:rgba(255,255,255,.8);}
+.newsletter-form{display:flex;gap:10px;max-width:420px;margin:18px auto 0;flex-wrap:wrap;justify-content:center;}
+.newsletter-form input{flex:1;min-width:220px;padding:12px 16px;border-radius:999px;border:none;font-size:14px;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy-900);color:rgba(255,255,255,.65);padding:44px 0 24px;font-size:13.5px;}
+.footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08);}
+.footer-desc{color:rgba(255,255,255,.5);margin-top:10px;max-width:32ch;}
+.footer-heading{color:#fff;font-weight:600;margin-bottom:12px;}
+.footer-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+.footer-links a{color:rgba(255,255,255,.6);}
+.footer-links a:hover{color:#fff;}
+.social-row{display:flex;gap:10px;}
+.social-row a{
+  width:34px;height:34px;border-radius:999px;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;color:#fff;
+}
+.social-row a:hover{background:rgba(255,255,255,.18);}
+.footer-bottom{padding-top:20px;text-align:center;}
+
+/* ---------- TOAST ---------- */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--navy-900);color:#fff;padding:13px 22px;border-radius:999px;font-size:14px;
+  z-index:1200;opacity:0;pointer-events:none;transition:all .25s ease;box-shadow:var(--shadow);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+</style>
+</head>
+<body>
+
+<!-- =============== HEADER / NAVIGATION =============== -->
+<header>
+  <div class="nav">
+    <a href="#home" class="logo">
+      <span class="logo-mark">S</span>
+      <span class="logo-text">SkillUp Academy</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#instructors">Instructors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="search-box">
+      <span aria-hidden="true">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search courses...">
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="wishlistToggle" aria-label="Open wishlist">
+        ♡
+        <span class="badge" id="wishlistCount">0</span>
+      </button>
+      <button class="icon-btn" id="cartToggle" aria-label="Open cart">
+        🛒
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="btn btn-navy btn-sm" id="loginBtn">Login</button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- =============== HERO =============== -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Master Digital Skills From Anywhere</h1>
+      <p class="lead">Learn practical skills in Digital Marketing, Programming, Design and more.</p>
+      <div class="hero-btns">
+        <a href="#courses" class="btn btn-primary">Explore Courses</a>
+        <button class="btn btn-outline" id="startTrialBtn">Start Free Trial</button>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-art-row"><span class="tag">Meta Ads Mastery</span><span class="val">$49</span></div>
+      <div class="hero-art-row"><span class="tag">Python Programming</span><span class="val">$59</span></div>
+      <div class="hero-art-row"><span class="tag">Digital Marketing</span><span class="val">$39</span></div>
+      <div class="hero-art-row"><span class="tag">Freelancing Blueprint</span><span class="val">$25</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div><div class="stat-num">10K+</div><div class="stat-label">Students</div></div>
+    <div><div class="stat-num">50+</div><div class="stat-label">Courses</div></div>
+    <div><div class="stat-num">20+</div><div class="stat-label">Instructors</div></div>
+    <div><div class="stat-num">95%</div><div class="stat-label">Completion Rate</div></div>
+  </div>
+</div>
+
+<!-- =============== COURSES =============== -->
+<section id="courses">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Choose your next course</h2>
+      <p>Eight hands-on courses across marketing, code and design — taught by working practitioners.</p>
+    </div>
+
+    <div class="course-filters" id="filterChips"></div>
+    <div class="course-grid" id="courseGrid"></div>
+  </div>
+</section>
+
+<!-- =============== ABOUT =============== -->
+<section class="section-alt" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>A fictional academy, built for demonstration</h2>
+      <p>SkillUp Academy is a fictional online learning platform created for demonstration and educational purposes. Every course, instructor and student mentioned on this page is invented — nothing here represents a real business.</p>
+      <p>Students can learn Digital Marketing, Programming, Design, SEO, Freelancing and Web Development, taught through short, practical courses.</p>
+    </div>
+    <div class="hero-art hero-art-light">
+      <div class="hero-art-row"><span class="tag">Founded</span><span class="val">Demo, 2024</span></div>
+      <div class="hero-art-row"><span class="tag">Focus</span><span class="val">Practical skills</span></div>
+      <div class="hero-art-row"><span class="tag">Format</span><span class="val">Self-paced</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== INSTRUCTORS =============== -->
+<section id="instructors">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Meet a few instructors</h2>
+      <p>Three fictional educators from our (invented) teaching staff.</p>
+    </div>
+    <div class="instructor-grid" id="instructorGrid"></div>
+  </div>
+</section>
+
+<!-- =============== TESTIMONIALS =============== -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What students say</h2>
+      <p>Fictional testimonials, written to showcase the experience.</p>
+    </div>
+    <div class="testimonial-grid" id="testimonialGrid"></div>
+  </div>
+</section>
+
+<!-- =============== REGISTER =============== -->
+<section id="register">
+  <div class="wrap">
+    <div class="split-panel">
+      <div>
+        <h2>Create your free account</h2>
+        <p>Set up a demo account in seconds. This is a simulated form — nothing is stored or sent anywhere.</p>
+      </div>
+      <div>
+        <form id="registerForm" novalidate>
+          <div class="field">
+            <label for="regName">Name</label>
+            <input type="text" id="regName" required placeholder="Jordan Lee">
+          </div>
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" required placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required placeholder="••••••••">
+            <div class="form-note">Demo only — passwords are never stored or transmitted.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Create Free Account</button>
+          <div class="success-box" id="registerSuccess" hidden>Demo account registration completed.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CONTACT =============== -->
+<section class="section-alt" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Get in touch</h2>
+      <p>Questions about a course? Send a message and our (fictional) team will reply.</p>
+      <form id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" required>
+        </div>
+        <div class="field">
+          <label for="cEmail">Email</label>
+          <input type="email" id="cEmail" required>
+        </div>
+        <div class="field">
+          <label for="cSubject">Subject</label>
+          <input type="text" id="cSubject" required>
+        </div>
+        <div class="field">
+          <label for="cMessage">Message</label>
+          <textarea id="cMessage" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-navy">Send Message</button>
+        <div class="success-box" id="contactSuccess" hidden>Your message has been submitted.</div>
+      </form>
+    </div>
+
+    <div class="newsletter-box">
+      <h3>Join the newsletter</h3>
+      <p>One email a week with new courses and platform updates.</p>
+      <form class="newsletter-form" id="newsletterForm" novalidate>
+        <input type="email" id="newsletterEmail" placeholder="you@example.com" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <div class="success-box success-box-light" id="newsletterSuccess" hidden>Successfully subscribed to the demo newsletter.</div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== FOOTER =============== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><span class="logo-mark">S</span><span class="logo-text">SkillUp Academy</span></div>
+        <p class="footer-desc">A fictional online learning platform built for demonstration purposes.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Follow</div>
+        <div class="social-row">
+          <a href="#" aria-label="Twitter / X">𝕏</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 SkillUp Academy (demo). All data on this page is fictional.</div>
+  </div>
+</footer>
+
+<!-- =============== CART DRAWER =============== -->
+<div class="overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Your Cart</h3>
+    <button class="modal-close modal-close-static" id="closeCartBtn">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- =============== WISHLIST DRAWER =============== -->
+<div class="overlay" id="wishlistOverlay"></div>
+<div class="cart-drawer" id="wishlistDrawer">
+  <div class="cart-head">
+    <h3>Your Wishlist</h3>
+    <button class="modal-close modal-close-static" id="closeWishlistBtn">✕</button>
+  </div>
+  <div class="cart-items" id="wishlistItems"></div>
+</div>
+
+<!-- =============== COURSE DETAILS MODAL =============== -->
+<div class="overlay" id="courseModalOverlay">
+  <div class="modal modal-wide" id="courseModalContent"></div>
+</div>
+
+<!-- =============== FREE TRIAL MODAL =============== -->
+<div class="overlay" id="trialOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeTrialBtn">✕</button>
+    <h3>Start Your Free Trial</h3>
+    <p>Tell us where to send access. This is a demo — no real trial is created.</p>
+    <form id="trialForm" novalidate>
+      <div class="field"><label for="trialName">Name</label><input type="text" id="trialName" required></div>
+      <div class="field"><label for="trialEmail">Email</label><input type="email" id="trialEmail" required></div>
+      <div class="field"><label for="trialPhone">Phone</label><input type="tel" id="trialPhone" required></div>
+      <button type="submit" class="btn btn-primary btn-block">Start Free Trial</button>
+    </form>
+    <div class="success-box" id="trialSuccess" hidden>Your free trial has been started successfully!</div>
+  </div>
+</div>
+
+<!-- =============== CHECKOUT MODAL =============== -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal" id="checkoutModal">
+    <button class="modal-close" id="closeCheckoutBtn">✕</button>
+    <h3>Demo Checkout</h3>
+    <div class="form-note form-note-strong">Demo Checkout — No real payment will be processed.</div>
+    <form id="checkoutForm" novalidate>
+      <div class="field"><label for="chkName">Full Name</label><input type="text" id="chkName" required></div>
+      <div class="field"><label for="chkEmail">Email</label><input type="email" id="chkEmail" required></div>
+      <div class="field"><label for="chkPhone">Phone</label><input type="tel" id="chkPhone" required></div>
+      <div class="field"><label for="chkCountry">Country</label><input type="text" id="chkCountry" required></div>
+      <div class="field">
+        <label for="chkPayment">Payment Method</label>
+        <select id="chkPayment">
+          <option value="Demo Card">Demo Card</option>
+          <option value="Manual Payment">Manual Payment</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Complete Demo Enrollment</button>
+    </form>
+  </div>
+</div>
+
+<!-- =============== ORDER SUCCESS MODAL =============== -->
+<div class="overlay" id="orderOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeOrderBtn">✕</button>
+    <h3>Enrollment Successful 🎉</h3>
+    <div id="orderDetails"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================================================================
+   SKILLUP ACADEMY — SCRIPT.JS
+   Pure vanilla JavaScript. No analytics or tracking code of any
+   kind is included here — Meta Pixel will be added manually later.
+   ================================================================ */
+
+/* ---------- COURSE DATA ---------- */
+const COURSES = [
+  { id:'course-001', name:'Meta Ads Mastery', category:'Marketing', price:49, instructor:'Alex Morgan', rating:4.9, students:1250,
+    color:'#2d6cdf', short:'Learn to plan, launch and optimize Meta Ads campaigns from scratch.',
+    description:'A practical, campaign-by-campaign walkthrough of building and optimizing Meta Ads — including account setup, custom audiences and budget strategy.',
+    modules:['Ad account setup','Campaign structures that scale','Audience & creative testing','Reading the reports that matter'] },
+  { id:'course-002', name:'Python Programming', category:'Programming', price:59, instructor:'Daniel Osei', rating:4.8, students:3310,
+    color:'#13305f', short:'Go from zero to comfortable, confident Python — no prior coding needed.',
+    description:'Covers core syntax, data structures, functions and small real-world projects, building toward writing your own scripts and tools.',
+    modules:['Python fundamentals','Data structures & functions','Working with files & APIs','Mini capstone project'] },
+  { id:'course-003', name:'JavaScript Fundamentals', category:'Programming', price:45, instructor:'Priya Nair', rating:4.7, students:2870,
+    color:'#f2ae3f', short:'The core JavaScript every front-end developer needs, taught by building.',
+    description:'Learn variables, functions, the DOM and events by building small interactive pages — the same skills used to build this demo site.',
+    modules:['Syntax & variables','Functions & the DOM','Events & interactivity','Build a mini project'] },
+  { id:'course-004', name:'Digital Marketing', category:'Marketing', price:39, instructor:'Alex Morgan', rating:4.6, students:4120,
+    color:'#1f9d55', short:'A wide-angle view of modern marketing: channels, funnels and measurement.',
+    description:'Understand how paid, organic and email channels work together, and how to read a marketing funnel end to end.',
+    modules:['Channels overview','Funnels & customer journey','Content & email basics','Measuring what matters'] },
+  { id:'course-005', name:'Graphic Design Basics', category:'Design', price:35, instructor:'Lucas Mensah', rating:4.5, students:1980,
+    color:'#7c5cff', short:'Layout, color and type fundamentals for anyone starting in design.',
+    description:'Build a foundation in visual hierarchy, color theory and typography, with exercises using free tools.',
+    modules:['Layout & hierarchy','Color theory basics','Typography fundamentals','Portfolio-ready practice'] },
+  { id:'course-006', name:'SEO Masterclass', category:'Marketing', price:29, instructor:'Priya Nair', rating:4.4, students:2650,
+    color:'#4c8bff', short:'Rank pages with confidence: keywords, on-page SEO and link basics.',
+    description:'A step-by-step SEO course covering keyword research, on-page optimization and the fundamentals of building authority.',
+    modules:['Keyword research','On-page optimization','Technical SEO basics','Link building fundamentals'] },
+  { id:'course-007', name:'WordPress Development', category:'Development', price:40, instructor:'Daniel Osei', rating:4.5, students:1760,
+    color:'#0e234a', short:'Build and customize WordPress sites without relying on page builders.',
+    description:'Learn theme structure, custom templates and light PHP so you can build WordPress sites beyond the default theme.',
+    modules:['Theme structure','Custom templates','Light PHP for WP','Deploying a site'] },
+  { id:'course-008', name:'Freelancing Blueprint', category:'Freelancing', price:25, instructor:'Lucas Mensah', rating:4.8, students:3050,
+    color:'#f2ae3f', short:'Find clients, price your work and run a small freelance practice.',
+    description:'A practical guide to pricing, proposals, client communication and the basic admin of freelancing.',
+    modules:['Finding your first clients','Pricing & proposals','Client communication','Getting paid & admin'] },
+];
+
+const INSTRUCTORS = [
+  { name:'Alex Morgan', role:'Marketing & Meta Ads', color:'#2d6cdf', bio:'Ten years running paid social campaigns before moving into teaching marketing fundamentals.' },
+  { name:'Daniel Osei', role:'Programming', color:'#13305f', bio:'Backend engineer turned instructor, focused on making code approachable for total beginners.' },
+  { name:'Priya Nair', role:'Front-End & SEO', color:'#f2ae3f', bio:'Builds interactive web experiences and teaches the fundamentals behind them.' },
+];
+
+const TESTIMONIALS = [
+  { name:'Renee Ibarra', course:'Meta Ads Mastery', rating:5, text:'Clear, structured and practical — I finally understand how a campaign actually comes together.' },
+  { name:'Tobias Hahn', course:'Python Programming', rating:5, text:'Great pacing, and the mini project at the end tied everything together nicely.' },
+  { name:'Sana Malik', course:'Freelancing Blueprint', rating:4, text:'Practical, no-fluff advice on pricing that I used the same week.' },
+];
+
+/* ---------- APP STATE (persisted in localStorage) ---------- */
+let cart = loadFromStorage('skillup_cart', []);
+let wishlist = new Set(loadFromStorage('skillup_wishlist', []));
+let currentFilter = 'All';
+
+/* ---------- LOCAL STORAGE HELPERS ----------
+   Only harmless demo state (cart, wishlist) is stored here.
+   No passwords or payment details are ever saved. */
+function loadFromStorage(key, fallback){
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+function saveCart(){
+  localStorage.setItem('skillup_cart', JSON.stringify(cart));
+}
+function saveWishlist(){
+  localStorage.setItem('skillup_wishlist', JSON.stringify([...wishlist]));
+}
+
+/* ---------- RENDER: COURSE FILTERS ---------- */
+function renderFilters(){
+  const cats = ['All', ...new Set(COURSES.map(c => c.category))];
+  const chipWrap = document.getElementById('filterChips');
+  chipWrap.innerHTML = cats.map(cat =>
+    `<button class="chip ${cat === currentFilter ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
+  ).join('');
+  chipWrap.querySelectorAll('.chip').forEach(btn => {
+    btn.addEventListener('click', () => filterCoursesByCategory(btn.dataset.cat));
+  });
+}
+
+function filterCoursesByCategory(category){
+  currentFilter = category;
+  renderFilters();
+  renderCourses(document.getElementById('searchInput').value);
+}
+
+/* ---------- RENDER: COURSE GRID ---------- */
+function renderCourses(searchTerm = ''){
+  const grid = document.getElementById('courseGrid');
+  const matches = getMatchingCourses(searchTerm);
+
+  if (matches.length === 0){
+    grid.innerHTML = `<div class="no-results">No courses found. Try a different search or category.</div>`;
+    return;
+  }
+
+  grid.innerHTML = matches.map(c => `
+    <div class="course-card">
+      <div class="course-thumb" style="background:${c.color};">
+        ${c.name}
+        <button class="wishlist-btn ${wishlist.has(c.id) ? 'active' : ''}" data-wishlist="${c.id}" aria-label="Toggle wishlist">
+          ${wishlist.has(c.id) ? '♥' : '♡'}
+        </button>
+      </div>
+      <div class="course-body">
+        <div class="course-cat">${c.category}</div>
+        <h3 class="course-title">${c.name}</h3>
+        <p style="font-size:13.5px;">${c.short}</p>
+        <div class="course-meta">
+          <span>★ ${c.rating}</span>
+          <span>${c.students.toLocaleString()} students</span>
+          <span>By ${c.instructor}</span>
+        </div>
+        <div class="course-price-row">
+          <span class="course-price">$${c.price}</span>
+        </div>
+        <div class="course-actions">
+          <button class="btn btn-ghost" data-view="${c.id}">View Course</button>
+          <button class="btn btn-navy" data-enroll="${c.id}">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('[data-view]').forEach(btn =>
+    btn.addEventListener('click', () => openCourseModal(btn.dataset.view)));
+  grid.querySelectorAll('[data-enroll]').forEach(btn =>
+    btn.addEventListener('click', () => addToCart(btn.dataset.enroll)));
+  grid.querySelectorAll('[data-wishlist]').forEach(btn =>
+    btn.addEventListener('click', () => toggleWishlist(btn.dataset.wishlist)));
+}
+
+function getMatchingCourses(searchTerm){
+  let list = COURSES;
+  if (currentFilter !== 'All') list = list.filter(c => c.category === currentFilter);
+  if (searchTerm && searchTerm.trim() !== ''){
+    const q = searchTerm.trim().toLowerCase();
+    list = list.filter(c => c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q));
+  }
+  return list;
+}
+
+/* ---------- SEARCH ---------- */
+function searchCourses(term){
+  renderCourses(term);
+}
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchCourses(e.target.value);
+});
+
+/* ---------- RENDER: INSTRUCTORS & TESTIMONIALS ---------- */
+function renderInstructors(){
+  document.getElementById('instructorGrid').innerHTML = INSTRUCTORS.map(i => `
+    <div class="instructor-card">
+      <div class="avatar" style="background:${i.color};">${i.name.split(' ').map(n=>n[0]).join('')}</div>
+      <h4 style="margin-bottom:2px;">${i.name}</h4>
+      <div style="font-size:13px;color:var(--blue-500);font-weight:600;margin-bottom:10px;">${i.role}</div>
+      <p style="font-size:13.5px;">${i.bio}</p>
+    </div>
+  `).join('');
+}
+
+function renderTestimonials(){
+  document.getElementById('testimonialGrid').innerHTML = TESTIMONIALS.map(t => `
+    <div class="testimonial-card">
+      <div class="stars">${'★'.repeat(t.rating)}${'☆'.repeat(5 - t.rating)}</div>
+      <p style="font-size:14.5px;">"${t.text}"</p>
+      <div class="testimonial-name">${t.name}</div>
+      <div style="font-size:12.5px;color:var(--ink-soft);">${t.course} · Demo review</div>
+    </div>
+  `).join('');
+}
+
+/* ---------- COURSE DETAILS MODAL ---------- */
+function openCourseModal(courseId){
+  const c = COURSES.find(x => x.id === courseId);
+  if (!c) return;
+
+  document.getElementById('courseModalContent').innerHTML = `
+    <button class="modal-close" id="closeCourseModalBtn">✕</button>
+    <div class="cd-header">
+      <div class="cd-thumb" style="background:${c.color};"></div>
+      <div>
+        <div class="course-cat">${c.category}</div>
+        <h3>${c.name}</h3>
+        <div class="cd-badges">
+          <span>★ ${c.rating}</span>
+          <span>${c.students.toLocaleString()} students</span>
+          <span>Instructor: ${c.instructor}</span>
+        </div>
+        <div class="course-price" style="font-size:24px;">$${c.price}</div>
+      </div>
+    </div>
+    <p style="margin-top:18px;">${c.description}</p>
+    <h4 style="font-size:15px;">Course Modules</h4>
+    <ul class="cd-modules">
+      ${c.modules.map((m,i) => `<li><span>${i+1}. ${m}</span></li>`).join('')}
+    </ul>
+    <button class="btn btn-primary btn-block" data-enroll-modal="${c.id}">Enroll Now — $${c.price}</button>
+  `;
+
+  document.getElementById('courseModalOverlay').classList.add('open');
+  document.getElementById('closeCourseModalBtn').addEventListener('click', closeCourseModal);
+  document.querySelector('[data-enroll-modal]').addEventListener('click', () => {
+    addToCart(c.id);
+    closeCourseModal();
+  });
+}
+function closeCourseModal(){
+  document.getElementById('courseModalOverlay').classList.remove('open');
+}
+document.getElementById('courseModalOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'courseModalOverlay') closeCourseModal();
+});
+
+/* ---------- WISHLIST ---------- */
+function toggleWishlist(courseId){
+  const c = COURSES.find(x => x.id === courseId);
+  if (!c) return;
+
+  if (wishlist.has(courseId)){
+    wishlist.delete(courseId);
+    showToast(`${c.name} removed from wishlist`);
+  } else {
+    wishlist.add(courseId);
+    showToast(`${c.name} added to wishlist`);
+  }
+  saveWishlist();
+  renderCourses(document.getElementById('searchInput').value);
+  updateWishlistUI();
+}
+
+function updateWishlistUI(){
+  document.getElementById('wishlistCount').textContent = wishlist.size;
+  const wrap = document.getElementById('wishlistItems');
+
+  if (wishlist.size === 0){
+    wrap.innerHTML = `<div class="empty-note">Your wishlist is empty. Tap the heart on any course to save it here.</div>`;
+    return;
+  }
+
+  wrap.innerHTML = [...wishlist].map(id => {
+    const c = COURSES.find(x => x.id === id);
+    if (!c) return '';
+    return `
+      <div class="cart-item">
+        <div class="cart-item-thumb" style="background:${c.color};"></div>
+        <div class="cart-item-info">
+          <div class="name">${c.name}</div>
+          <div class="price">$${c.price}</div>
+        </div>
+        <button class="remove-btn" data-unwish="${c.id}">Remove</button>
+      </div>
+    `;
+  }).join('');
+  wrap.querySelectorAll('[data-unwish]').forEach(btn =>
+    btn.addEventListener('click', () => toggleWishlist(btn.dataset.unwish)));
+}
+
+document.getElementById('wishlistToggle').addEventListener('click', openWishlist);
+document.getElementById('closeWishlistBtn').addEventListener('click', closeWishlist);
+document.getElementById('wishlistOverlay').addEventListener('click', closeWishlist);
+function openWishlist(){
+  document.getElementById('wishlistDrawer').classList.add('open');
+  document.getElementById('wishlistOverlay').classList.add('open');
+}
+function closeWishlist(){
+  document.getElementById('wishlistDrawer').classList.remove('open');
+  document.getElementById('wishlistOverlay').classList.remove('open');
+}
+
+/* ---------- CART ---------- */
+function addToCart(courseId){
+  const c = COURSES.find(x => x.id === courseId);
+  if (!c) return;
+
+  if (cart.includes(courseId)){
+    showToast(`${c.name} is already in your cart`);
+    return;
+  }
+
+  cart.push(courseId);
+  saveCart();
+  updateCartUI();
+  showToast(`${c.name} added to cart`);
+}
+
+function removeFromCart(index){
+  cart.splice(index, 1);
+  saveCart();
+  updateCartUI();
+}
+
+function calculateCartTotal(){
+  return cart.reduce((sum, id) => {
+    const c = COURSES.find(x => x.id === id);
+    return sum + (c ? c.price : 0);
+  }, 0);
+}
+
+function updateCartUI(){
+  document.getElementById('cartCount').textContent = cart.length;
+  const itemsWrap = document.getElementById('cartItems');
+
+  if (cart.length === 0){
+    itemsWrap.innerHTML = `<div class="empty-note">Your cart is empty. Browse courses to get started.</div>`;
+  } else {
+    itemsWrap.innerHTML = cart.map((id, idx) => {
+      const c = COURSES.find(x => x.id === id);
+      if (!c) return '';
+      return `
+        <div class="cart-item">
+          <div class="cart-item-thumb" style="background:${c.color};"></div>
+          <div class="cart-item-info">
+            <div class="name">${c.name}</div>
+            <div class="price">$${c.price}</div>
+          </div>
+          <button class="remove-btn" data-remove="${idx}">Remove</button>
+        </div>
+      `;
+    }).join('');
+    itemsWrap.querySelectorAll('[data-remove]').forEach(btn =>
+      btn.addEventListener('click', () => removeFromCart(Number(btn.dataset.remove))));
+  }
+
+  document.getElementById('cartTotal').textContent = `$${calculateCartTotal()}`;
+}
+
+document.getElementById('cartToggle').addEventListener('click', openCart);
+document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+function openCart(){
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+}
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+
+/* ---------- CHECKOUT ---------- */
+document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
+document.getElementById('closeCheckoutBtn').addEventListener('click', closeCheckout);
+
+function openCheckout(){
+  if (cart.length === 0){
+    showToast('Your cart is empty');
+    return;
+  }
+  closeCart();
+  document.getElementById('checkoutOverlay').classList.add('open');
+}
+function closeCheckout(){
+  document.getElementById('checkoutOverlay').classList.remove('open');
+}
+
+document.getElementById('checkoutForm').addEventListener('submit', submitCheckout);
+function submitCheckout(e){
+  e.preventDefault();
+
+  const purchasedIds = [...cart];
+  const purchaseTotal = calculateCartTotal();
+  const orderId = 'SKU-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+
+  closeCheckout();
+  document.getElementById('orderDetails').innerHTML = `
+    <div class="success-box">Enrollment ID: ${orderId}</div>
+    <p style="margin-top:14px;">Courses enrolled:</p>
+    <ul class="cd-modules">
+      ${purchasedIds.map(id => {
+        const c = COURSES.find(x => x.id === id);
+        return c ? `<li><span>${c.name}</span><span>$${c.price}</span></li>` : '';
+      }).join('')}
+    </ul>
+    <div class="cart-total-row"><span>Total (demo)</span><span>$${purchaseTotal}</span></div>
+  `;
+  document.getElementById('orderOverlay').classList.add('open');
+
+  cart = [];
+  saveCart();
+  updateCartUI();
+  e.target.reset();
+}
+document.getElementById('closeOrderBtn').addEventListener('click', () => {
+  document.getElementById('orderOverlay').classList.remove('open');
+});
+
+/* ---------- FREE TRIAL ---------- */
+document.getElementById('startTrialBtn').addEventListener('click', openTrialModal);
+document.getElementById('closeTrialBtn').addEventListener('click', closeTrialModal);
+
+function openTrialModal(){
+  document.getElementById('trialForm').hidden = false;
+  document.getElementById('trialSuccess').hidden = true;
+  document.getElementById('trialOverlay').classList.add('open');
+}
+function closeTrialModal(){
+  document.getElementById('trialOverlay').classList.remove('open');
+}
+
+document.getElementById('trialForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('trialForm').hidden = true;
+  document.getElementById('trialSuccess').hidden = false;
+  e.target.reset();
+});
+
+/* ---------- REGISTRATION ---------- */
+document.getElementById('registerForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('registerSuccess').hidden = false;
+  e.target.reset();
+  // No real account is created and no password is stored — demo only.
+});
+
+/* ---------- NEWSLETTER ---------- */
+document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('newsletterSuccess').hidden = false;
+  e.target.reset();
+});
+
+/* ---------- CONTACT FORM ---------- */
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('contactSuccess').hidden = false;
+  e.target.reset();
+});
+
+/* ---------- LOGIN (demo placeholder) ---------- */
+document.getElementById('loginBtn').addEventListener('click', () => {
+  showToast('Demo site — login is not implemented.');
+});
+
+/* ---------- MOBILE NAVIGATION ---------- */
+document.getElementById('hamburgerBtn').addEventListener('click', toggleMobileNav);
+function toggleMobileNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('#navLinks a').forEach(a =>
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+/* ---------- TOAST ---------- */
+let toastTimer;
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+/* ---------- INIT ---------- */
+function init(){
+  renderFilters();
+  renderCourses();
+  renderInstructors();
+  renderTestimonials();
+  updateCartUI();
+  updateWishlistUI();
+}
+init();
+
+</script>
+</body>
+</html>
